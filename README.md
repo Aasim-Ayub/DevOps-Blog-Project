@@ -1,5 +1,4 @@
-# DevOps Blog Project
-
+# DevOps Blog Project By Asim Ayub &Muhammad Sameed Asif
 ## Overview
 This is a full-stack blog application developed as part of the Web Technologies course project. It consists of:
 - **Frontend:** Built using React.
