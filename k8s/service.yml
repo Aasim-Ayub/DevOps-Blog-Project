@@ -1,0 +1,49 @@
+---
+# Service for the backend (API)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: devops-blog-backend
+spec:
+  selector:
+    app: devops-blog-backend
+  ports:
+  - protocol: TCP
+    port: 4000 # Exposed service port
+    targetPort: 4000 # Container port
+  type: ClusterIP
+---
+# Service for the frontend (Client)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: devops-blog-frontend
+spec:
+  selector:
+    app: devops-blog-frontend
+  ports:
+  - protocol: TCP
+    port: 3000 # Exposed service port
+    targetPort: 3000 # Container port
+  type: LoadBalancer
+---
+# Service for MongoDB
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  labels:
+    app: mongodb
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - protocol: TCP
+    port: 27017 # Exposed MongoDB service port
+    targetPort: 27017 # Container port
+  type: ClusterIP
+

@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: devops-blog-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-blog-backend
+  template:
+    metadata:
+      labels:
+        app: devops-blog-backend
+    spec:
+      containers:
+      - name: backend-container
+        image: asimayub/devops-blog-backend:latest
+        ports:
+        - containerPort: 4000
+        env:
+        - name: MONGODB_URI
+          value: mongodb://mongodb-service:27017/devops-blog
+        volumeMounts:
+        - name: uploads
+          mountPath: /app/uploads
+      volumes:
+      - name: uploads
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: devops-blog-backend
+  ports:
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: devops-blog-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-blog-frontend
+  template:
+    metadata:
+      labels:
+        app: devops-blog-frontend
+    spec:
+      containers:
+      - name: frontend-container
+        image: asimayub/devops-blog-frontend:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REACT_APP_BACKEND_URL
+          value: http://backend-service:4000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: devops-blog-frontend
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb-container
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
