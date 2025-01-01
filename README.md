@@ -6,10 +6,10 @@ This project is a Blog Application designed to demonstrate containerized microse
 The project is organized as follows:
 
 📦 Blog Project
-├── 📁 backend          # Backend microservice code
-├── 📁 frontend         # Frontend microservice code
-├── 📁 k8s              # Kubernetes manifests (Deployment, Service, Ingress, etc.)
-├── 📄 docker-compose.yml  # Multi-container setup for local development
+-- 📁 backend          # Backend microservice code
+-- 📁 frontend         # Frontend microservice code
+-- 📁 k8s              # Kubernetes manifests (Deployment, Service, Ingress, etc.)
+📄 docker-compose.yml  # Multi-container setup for local development
 
 Key Files and Folders:
 backend/: Contains the source code for the backend service, built with Node.js and Express.js.
