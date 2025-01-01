@@ -1,2 +1,0 @@
-Testing Kubernetes intregration
-Testing Kubernetes intregration

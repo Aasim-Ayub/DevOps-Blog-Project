@@ -1,103 +1,121 @@
-# DevOps Blog Project By Asim Ayub & Muhammad Sameed Asif
+DevOps Blog Project: CI/CD and Kubernetes Deployment
+📖 Overview
+This project is a Blog Application designed to demonstrate containerized microservices architecture using Docker, automated CI/CD pipeline with Jenkins, and deployment to Kubernetes. The application consists of two main components: a frontend and a backend, deployed as separate services and managed via Kubernetes.
 
-```markdown
-# DevOps Blog Project
+📂 Repository Structure
+The project is organized as follows:
 
-## Overview
+📦 Blog Project
+├── 📁 backend          # Backend microservice code
+├── 📁 frontend         # Frontend microservice code
+├── 📁 k8s              # Kubernetes manifests (Deployment, Service, Ingress, etc.)
+├── 📄 docker-compose.yml  # Multi-container setup for local development
 
-This project is a full-stack blog application developed as part of the Web Technologies course. It allows users to create, edit, and delete blog posts, with a responsive UI for an enhanced user experience.
+Key Files and Folders:
+backend/: Contains the source code for the backend service, built with Node.js and Express.js.
+frontend/: Contains the source code for the frontend service, built with React.js.
+k8s/: Holds Kubernetes YAML files to manage deployments, services, and ingress.
+docker-compose.yml: Used for local development to spin up multiple containers.
+Jenkinsfile: Defines the CI/CD pipeline, including build, test, and deployment steps.
 
-## Features
+🚀 How to Clone and Use This Project
+Prerequisites:
+Install Git.
+Install Docker and Docker Compose.
+(Optional) Install Kubernetes (minikube or a cluster).
+Install kubectl (Kubernetes CLI).
 
-- **User Authentication**: Secure registration and login functionality.
-- **Blog Management**: Create, edit, and delete blog posts.
-- **Post Listings**: View a list of all blog posts.
-- **Responsive Design**: Optimized for various devices.
+Clone the Repository:
+Open a terminal and run:
 
-## Technologies Used
+git clone https://github.com/Aasim-Ayub/DevOps-Blog-Project.git 
+cd DevOps-Blog-Project
+Navigate to the respective folders for backend, frontend, or Kubernetes manifests as needed.
 
-- **Frontend**: React
-- **Backend**: Node.js
-- **Database**: MongoDB
-- **Containerization**: Docker
-- **Orchestration**: Kubernetes
-- **CI/CD**: Jenkins
+🔧 CI/CD Pipeline
+This project uses Jenkins for the CI/CD pipeline to automate building, testing, and deploying the application.
 
-## Prerequisites
+Pipeline Steps:
+Clone Repository: Pulls the latest code.
+Build Docker Images: Builds container images for backend and frontend services.
+Push Images to Docker Hub: Uploads the Docker images to your Docker Hub repository.
+Deploy to Kubernetes: Deploys the application to a Kubernetes cluster.
+Setting Up the Pipeline:
+Add the repository to Jenkins using the Jenkinsfile located at the root of the project.
+Configure Webhooks in GitHub to trigger Jenkins builds automatically on push events.
+Add Docker Hub and Kubernetes credentials in Jenkins.
 
-Ensure you have the following installed:
+🐳 Docker Commands for Manual Execution
+If you prefer running the application manually without the CI/CD pipeline, follow these steps:
 
-- [Docker](https://www.docker.com/get-started)
-- [Kubernetes](https://kubernetes.io/docs/setup/)
-- [Jenkins](https://www.jenkins.io/download/)
+Build Docker Images:
 
-## Installation
+docker build -t your-dockerhub-username/backend:latest ./backend
+docker build -t your-dockerhub-username/frontend:latest ./frontend
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Aasim-Ayub/DevOps-Blog-Project.git
-   cd DevOps-Blog-Project
-   ```
+Run Docker Compose Locally:
 
-2. **Set Up Environment Variables**:
-   - Create a `.env` file in the `api` directory with the following variables:
-     ```env
-     MONGO_URI=your_mongodb_connection_string
-     JWT_SECRET=your_jwt_secret
-     ```
+docker-compose up
 
-3. **Build and Run with Docker Compose**:
-   ```bash
-   docker-compose up --build
-   ```
+Push Images to Docker Hub:
 
-   This command will build and start the frontend, backend, and database services.
+docker push your-dockerhub-username/backend:latest
+docker push your-dockerhub-username/frontend:latest
 
-## Deployment
+Run Containers Individually (without Compose):
 
-For production deployment, Kubernetes manifests are provided in the `k8s` directory.
+docker run -d --name backend -p 5000:5000 your-dockerhub-username/backend:latest
+docker run -d --name frontend -p 3000:3000 your-dockerhub-username/frontend:latest
 
-1. **Apply Kubernetes Manifests**:
-   ```bash
-   kubectl apply -f k8s/
-   ```
+☸ Kubernetes Deployment Process
+To deploy the application to Kubernetes, follow these steps:
 
-2. **Set Up Jenkins Pipeline**:
-   - Use the provided `Jenkinsfile` to set up a CI/CD pipeline in Jenkins.
-   - Ensure Jenkins has the necessary permissions and plugins to interact with your Kubernetes cluster.
+Ensure kubectl is Configured:
 
-## Usage
+Verify your Kubernetes context is set up correctly:
 
-- Access the application at `http://localhost:3000`.
-- Register a new account or log in with existing credentials.
-- Create, edit, or delete blog posts through the user interface.
+kubectl config current-context
 
-## Contributing
+Apply Kubernetes Manifests:
 
-Contributions are welcome! Please follow these steps:
+kubectl apply -f k8s/
 
-1. **Fork the Repository**: Click on the 'Fork' button at the top right of this page.
-2. **Create a New Branch**:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Commit Your Changes**:
-   ```bash
-   git commit -m 'Add some feature'
-   ```
-4. **Push to the Branch**:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. **Open a Pull Request**: Navigate to the original repository and click on 'New Pull Request'.
+Check Deployment Status:
 
-## License
+kubectl get pods -n blog-namespace
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Access the Application:
 
-## Contact
+Use the Ingress IP or node port to access the frontend.
 
-- **Authors**: Aasim Ayub & Muhammad Sameed Asif
-- **Email**: [221020@students.au.edu.pk](mailto:221020@students.au.edu.pk)
-- **Email**: [221092@students.au.edu.pk](mailto:221092@students.au.edu.pk)
-```
+Stop Deployment (if needed):
+
+kubectl delete -f k8s/
+
+🛠 Development Setup
+Run Locally with Docker Compose:
+
+docker-compose up
+Access the Application:
+
+Frontend: http://localhost:3000
+Backend: http://localhost:5000
+Modify and test the code as needed.
+
+🌟 Features
+Microservices Architecture: Backend and frontend are containerized and independently managed.
+CI/CD Pipeline: Automated build and deployment process with Jenkins.
+Kubernetes Deployment: Scalable and fault-tolerant deployment.
+Docker Hub Integration: Images are stored and pulled from Docker Hub for portability.
+🐛 Troubleshooting
+Common Issues:
+Kubernetes Deployment Fails:
+
+Ensure Docker images are pushed to the repository.
+Verify the Kubernetes manifests in the k8s/ folder.
+CI/CD Pipeline Errors:
+
+Check Jenkins logs for errors, especially authentication or connection issues.
+Local Development Issues:
+
+Confirm Docker Compose is installed and working properly.
