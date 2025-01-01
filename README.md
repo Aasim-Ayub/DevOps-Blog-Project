@@ -1,8 +1,9 @@
-DevOps Blog Project: CI/CD and Kubernetes Deployment
+﻿DevOps Blog Project: CI/CD and Kubernetes Deployment
 📖 Overview
 This project is a Blog Application designed to demonstrate containerized microservices architecture using Docker, automated CI/CD pipeline with Jenkins, and deployment to Kubernetes. The application consists of two main components: a frontend and a backend, deployed as separate services and managed via Kubernetes.
 
 📂 Repository Structure
+
 The project is organized as follows:
 
 📦 Blog Project
@@ -16,20 +17,24 @@ backend/: Contains the source code for the backend service, built with Node.js a
 frontend/: Contains the source code for the frontend service, built with React.js.
 k8s/: Holds Kubernetes YAML files to manage deployments, services, and ingress.
 docker-compose.yml: Used for local development to spin up multiple containers.
-Jenkinsfile: Defines the CI/CD pipeline, including build, test, and deployment steps.
 
 🚀 How to Clone and Use This Project
 Prerequisites:
+
 Install Git.
+
 Install Docker and Docker Compose.
+
 (Optional) Install Kubernetes (minikube or a cluster).
+
 Install kubectl (Kubernetes CLI).
 
 Clone the Repository:
-Open a terminal and run:
 
+Open a terminal and run:
 git clone https://github.com/Aasim-Ayub/DevOps-Blog-Project.git 
 cd DevOps-Blog-Project
+
 Navigate to the respective folders for backend, frontend, or Kubernetes manifests as needed.
 
 🔧 CI/CD Pipeline
@@ -99,7 +104,7 @@ docker-compose up
 Access the Application:
 
 Frontend: http://localhost:3000
-Backend: http://localhost:5000
+Backend: http://localhost:4000
 Modify and test the code as needed.
 
 🌟 Features
@@ -107,6 +112,7 @@ Microservices Architecture: Backend and frontend are containerized and independe
 CI/CD Pipeline: Automated build and deployment process with Jenkins.
 Kubernetes Deployment: Scalable and fault-tolerant deployment.
 Docker Hub Integration: Images are stored and pulled from Docker Hub for portability.
+
 🐛 Troubleshooting
 Common Issues:
 Kubernetes Deployment Fails:
