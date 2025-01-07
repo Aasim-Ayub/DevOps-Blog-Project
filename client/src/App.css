@@ -5,7 +5,7 @@ a{
     cursor: pointer;
 }
 body{
-    color: #222;
+    color: #eb2121;
 }
 img{
     max-width: 100%;
@@ -88,9 +88,9 @@ button{
     cursor: pointer;
     width: 100%;
     display: block;
-    background-color: #555;
+    background-color: #e0dada;
     border:0;
-    color: #fff;
+    color: #fdfafa;
     border-radius: 5px;
     padding: 7px 0;
 }
